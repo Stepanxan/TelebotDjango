@@ -112,6 +112,39 @@ class Lk ():
             bot.send_message(chat_id, f'Ви обрали: {vertical}')
 
 
+#Обробка натискання кнопки "Поповнення"
+    @staticmethod
+    def payment_markup(message):
+        chat_id = message.chat.id
+        markup = types.ReplyKeyboardMarkup(row_width=1)
+        btn_1 = types.KeyboardButton('QIWI')
+        btn_2 = types.KeyboardButton('Bitcoin')
+        btn_3 = types.KeyboardButton('Перевід на картку')
+        back = types.KeyboardButton('⬅️ Назад')
+        markup.row(btn_1, btn_2, btn_3, back)
+        bot.send_message(chat_id, 'Ви обрали спосіб оплати', reply_markup=markup)
+
+    # Обробка типу оплати
+    @staticmethod
+    def handle_payment(message):
+        chat_id = message.chat.id
+        payment_method = message.text
+        if payment_method in ['QIWI', 'Bitcoin', 'Перевід на картку']:
+            bot.send_message(chat_id, f'Ви обрали спосіб оплати: {payment_method}')
+            confirm_markup = types.ReplyKeyboardMarkup(row_width=1)
+            btn_1 = types.KeyboardButton('✅ Підтвердити')
+            back = types.KeyboardButton('⬅️ Назад')
+            confirm_markup.row(btn_1, back)
+            bot.send_message(chat_id, 'Натисніть кнопку Підтвердити для продовження', reply_markup=confirm_markup)
+        elif message.text == '⬅️ Назад':
+            markup = types.ReplyKeyboardMarkup(row_width=1)
+            btn_1 = types.KeyboardButton('🔢 Вибір вертикалі')
+            btn_2 = types.KeyboardButton('👤 Особистий кабінет')
+            markup.row(btn_1, btn_2)
+            bot.send_message(message.chat.id, 'повернувся до головного меню', reply_markup=markup)
+        else:
+            bot.send_message(chat_id, 'Невірний вибір способу оплати.')
+
     # Обробка натискання кнопки " Історія транзакцій"
     @staticmethod
     def handle_transactions_history(message):
@@ -156,7 +189,7 @@ class Lk ():
     @staticmethod
     def handle_support_button(message):
         chat_id = message.chat.id
-        support_channel_id = "-6170783158"
+        support_channel_id = "6170783158"
         support_link = f"https://t.me/c/{support_channel_id[4:]}"  # Посилання на канал саппорту
         bot.send_message(chat_id, f"Якщо у вас виникли питання або потрібна допомога, приєднуйтесь до нашого каналу саппорту VNV Solutions Bot: {support_link}")
 

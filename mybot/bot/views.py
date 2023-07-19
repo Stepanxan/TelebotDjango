@@ -90,6 +90,16 @@ def choose_product(message):
     Product.choose_product(message)
 
 
+# Обробка натискання кнопки "Поповнення"
+@bot.message_handler(func=lambda message: message.text == '💳 Поповнення')
+def payment_markup(message):
+    Lk.payment_markup(message)
+
+# Обробка типу оплати
+@bot.message_handler(func=lambda message: message.text in ['QIWI', 'Bitcoin', 'Перевід на картку', '⬅️ Назад'])
+def handle_payment(message):
+    Lk.handle_payment(message)
+
 
 # Обробник натискання кнопки " Історія транзакцій"
 @bot.message_handler(func=lambda message: message.text == '🗂 Історія транзакцій')
@@ -112,7 +122,7 @@ def handle_my_purchases(message):
     if not purchase_history:
         bot.send_message(chat_id, "У вас ще немає покупок.")
     else:
-        purchases_info = "🛍️ Ваші покупки:\n"
+        purchases_info = "🛒 Ваші покупки:\n"
         for purchase in purchase_history:
             purchases_info += f"{purchase}\n"
 

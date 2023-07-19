@@ -119,7 +119,7 @@ BOT_TOKEN = '6322977859:AAHuQBiddHs0KUOgffgGSuHGTnLrxyAabfI'
 
 
 # URL-адреса веб-хука для отримання оновлень від Telegram
-TELEGRAM_WEBHOOK_URL = 'https://9832-185-46-221-38.ngrok-free.app/telegram_webhook/'  # Підставте вашу URL-адресу
+TELEGRAM_WEBHOOK_URL = 'https://eaea-185-46-221-38.ngrok-free.app/telegram_webhook/'  # Підставте вашу URL-адресу
 
 # Встановлення налаштувань для використання веб-хука
 WEBHOOK_SETTINGS = {
